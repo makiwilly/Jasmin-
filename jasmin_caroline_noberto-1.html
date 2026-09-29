@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Jasmin Caroline Noberto</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #050505;
+      color: #f5f1e8;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    #garden {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    .flower {
+      position: absolute;
+      bottom: -100px;
+      width: var(--size);
+      height: var(--size);
+      opacity: 0;
+      animation: grow var(--duration) ease-in-out forwards;
+      animation-delay: var(--delay);
+      filter: drop-shadow(0 0 8px rgba(255,255,255,.18));
+    }
+
+    .flower .petal {
+      position: absolute;
+      width: 48%;
+      height: 68%;
+      left: 26%;
+      top: 12%;
+      background: radial-gradient(circle at 50% 70%, #fff 0%, #faf8ef 58%, #dedbd0 100%);
+      border-radius: 70% 30% 65% 35%;
+      transform-origin: 50% 80%;
+    }
+
+    .flower .p1 { transform: rotate(0deg) translateY(-24%); }
+    .flower .p2 { transform: rotate(72deg) translateY(-24%); }
+    .flower .p3 { transform: rotate(144deg) translateY(-24%); }
+    .flower .p4 { transform: rotate(216deg) translateY(-24%); }
+    .flower .p5 { transform: rotate(288deg) translateY(-24%); }
+
+    .flower .center {
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      left: 40%;
+      top: 40%;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f2d879 0 35%, #b89a35 40% 100%);
+      z-index: 2;
+    }
+
+    @keyframes grow {
+      0% {
+        transform: translateY(30px) scale(.1) rotate(-20deg);
+        opacity: 0;
+      }
+      20% { opacity: .15; }
+      60% { opacity: .72; }
+      100% {
+        transform: translateY(-105vh) scale(1) rotate(25deg);
+        opacity: .9;
+      }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at center, rgba(86, 100, 65, .16), transparent 35%),
+        linear-gradient(to bottom, #030303, #090909);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 900px;
+    }
+
+    .tiny,
+    .section-label {
+      color: #c9bd91;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-size: 10px;
+    }
+
+    .tiny { margin-bottom: 25px; }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(58px, 12vw, 130px);
+      line-height: .82;
+      letter-spacing: 2px;
+      text-shadow: 0 0 30px rgba(255,255,255,.08);
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4vw, 38px);
+      color: #e8dfc4;
+      margin-top: 28px;
+      letter-spacing: 3px;
+    }
+
+    .scroll {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      margin-top: 70px;
+      color: #aaa79e;
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: .3s;
+    }
+
+    .scroll:hover {
+      color: #fff;
+      transform: translateY(4px);
+    }
+
+    .arrow {
+      width: 1px;
+      height: 45px;
+      background: linear-gradient(#b7a96f, transparent);
+    }
+
+    section {
+      position: relative;
+      z-index: 2;
+      padding: 105px 20px;
+    }
+
+    .container {
+      width: min(1050px, 100%);
+      margin: auto;
+    }
+
+    .section-label {
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 7vw, 70px);
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .intro {
+      color: #aaa79e;
+      line-height: 1.9;
+      max-width: 760px;
+      font-size: 14px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 45px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.07);
+      padding: 30px;
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,.045);
+      border-color: rgba(194,177,108,.3);
+    }
+
+    .number {
+      color: #b9aa72;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #999891;
+      line-height: 1.75;
+      font-size: 13px;
+    }
+
+    .meaning {
+      background: linear-gradient(135deg, #0b0d09, #050505);
+      border-top: 1px solid #171914;
+      border-bottom: 1px solid #171914;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      margin-top: 45px;
+    }
+
+    .photo {
+      min-height: 520px;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .photo.small { min-height: 250px; }
+
+    .photo-stack {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.55), transparent 55%);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #55554f;
+      font-size: 10px;
+      letter-spacing: 2px;
+      border-top: 1px solid #111;
+    }
+
+    @media (max-width: 760px) {
+      .facts { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .photo { min-height: 390px; }
+      .photo-stack { grid-template-rows: 250px 250px; }
+      section { padding: 80px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .flower { animation: none; opacity: .35; bottom: 30%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="garden"></div>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="tiny">Jasminum</div>
+      <h1>Jasmin</h1>
+      <div class="name">Jasmin Caroline Noberto</div>
+
+      <a href="#fatos" class="scroll">
+        <span>descobrir</span>
+        <span class="arrow"></span>
+      </a>
+    </div>
+  </header>
+
+  <section id="fatos" class="meaning">
+    <div class="container">
+      <div class="section-label">01 · sobre a flor</div>
+      <h2>Jasmim</h2>
+
+      <p class="intro">
+        Jasmim é o nome comum dado a várias espécies do gênero
+        <i>Jasminum</i>, pertencente à família Oleaceae. São plantas
+        conhecidas principalmente por suas flores delicadas e pelo
+        perfume característico.
+      </p>
+
+      <div class="facts">
+        <article class="card">
+          <div class="number">01</div>
+          <h3>Perfume</h3>
+          <p>
+            O aroma do jasmim é marcante e fez da flor uma das matérias-primas
+            tradicionais da perfumaria. Algumas espécies apresentam perfume
+            especialmente intenso durante a noite.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">02</div>
+          <h3>Espécies</h3>
+          <p>
+            O gênero <i>Jasminum</i> possui mais de 200 espécies descritas,
+            com diferentes formas, hábitos de crescimento e características
+            das flores.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">03</div>
+          <h3>Distribuição</h3>
+          <p>
+            Espécies de jasmim são encontradas principalmente em regiões
+            tropicais e subtropicais da Ásia, África, Australásia e
+            Oceania.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">04</div>
+          <h3>Família</h3>
+          <p>
+            O jasmim pertence à família Oleaceae, a mesma família botânica
+            que inclui plantas como a oliveira, o freixo e o lilás.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">05</div>
+          <h3>Flores</h3>
+          <p>
+            As flores geralmente possuem formato delicado e podem ser
+            brancas, amarelas ou apresentar outras tonalidades dependendo
+            da espécie.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">06</div>
+          <h3>Usos</h3>
+          <p>
+            Além do uso ornamental, diferentes espécies são utilizadas
+            na produção de perfumes, óleos aromáticos e, em algumas
+            culturas, em preparações tradicionais.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">02 · curiosidades</div>
+      <h2>Alguns detalhes interessantes</h2>
+
+      <div class="facts">
+        <article class="card">
+          <h3>Jasmim e chá</h3>
+          <p>
+            O conhecido chá de jasmim geralmente é produzido aromatizando
+            folhas de chá, especialmente chá verde, com flores de jasmim.
+            O resultado combina o sabor do chá com o aroma floral.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Jasmim-estrela</h3>
+          <p>
+            Apesar do nome popular, o jasmim-estrela, <i>Trachelospermum
+            jasminoides</i>, não pertence ao gênero <i>Jasminum</i>.
+            Ele recebe esse nome por causa da semelhança de suas flores
+            e do perfume.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Flores noturnas</h3>
+          <p>
+            Em algumas espécies, a liberação de compostos aromáticos
+            aumenta no período noturno. Isso está relacionado à interação
+            da planta com seus polinizadores.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">03 · imagens</div>
+      <h2>Jasmim em detalhes</h2>
+
+      <div class="gallery">
+        <div
+          class="photo"
+          style="background-image:url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=1200&q=85');">
+        </div>
+
+        <div class="photo-stack">
+          <div
+            class="photo small"
+            style="background-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=85');">
+          </div>
+
+          <div
+            class="photo small"
+            style="background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85');">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    JASMINUM · BOTÂNICA · ✿
+  </footer>
+
+  <script>
+    const garden = document.getElementById("garden");
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.className = "flower";
+
+      const size = 24 + Math.random() * 48;
+      const duration = 10 + Math.random() * 13;
+      const delay = Math.random() * 5;
+
+      flower.style.setProperty("--size", size + "px");
+      flower.style.setProperty("--duration", duration + "s");
+      flower.style.setProperty("--delay", delay + "s");
+      flower.style.left = (Math.random() * 100) + "%";
+
+      flower.innerHTML = `
+        <span class="petal p1"></span>
+        <span class="petal p2"></span>
+        <span class="petal p3"></span>
+        <span class="petal p4"></span>
+        <span class="petal p5"></span>
+        <span class="center"></span>
+      `;
+
+      garden.appendChild(flower);
+
+      setTimeout(() => flower.remove(), (duration + delay) * 1000 + 1000);
+    }
+
+    setInterval(createFlower, 900);
+
+    for (let i = 0; i < 10; i++) {
+      setTimeout(createFlower, i * 450);
+    }
+  </script>
+
+</body>
+</html>
